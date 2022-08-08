@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class MovieView extends React.Component {
   render() {
@@ -17,11 +18,25 @@ class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-
-       </div>
+        <button
+          onClick={() => {
+            onBackClick(null);
+          }}
+        >
+          Back
+        </button>
+      </div>
     );
   }
+}
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };
 
 export default MovieView;
