@@ -40,13 +40,24 @@ class MainView extends React.Component {
     });
   }
 
+  // onRegistration(register) {
+  //   this.setState({
+  //     register,
+  //   });
+  // }
+
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, selectedMovie, user, register } = this.state;
+
+    // if (!register)
+    //   return (
+    //     <RegistrationView
+    //       onRegistration={(register) => this.onRegistration(register)}
+    //     />
+    //   );
 
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-
-    // if (!user) return <RegistrationView />;
 
     if (movies.length === 0)
       return <div className="main-view">The list is empty!</div>;

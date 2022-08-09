@@ -12,6 +12,9 @@ class MovieCard extends React.Component {
         }}
       >
         {movie.Title}
+        <div className="movie-poster">
+          <img src={movie.ImageURL} />
+        </div>
       </div>
     );
   }
@@ -21,7 +24,7 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
+    ImageURL: PropTypes.string.isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
 };
