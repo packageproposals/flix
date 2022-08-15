@@ -13,7 +13,6 @@ class MyFlixApplication extends React.Component {
   render() {
     return (
       <Container>
-        <NavBar />
         <MainView />
       </Container>
     );

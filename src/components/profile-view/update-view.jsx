@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 
-function RegistrationView(props) {
+function UpdateView(props) {
+  const { onBackClick } = props;
+  const Username = localStorage.getItem('user');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -36,7 +38,7 @@ function RegistrationView(props) {
     } else if (password.length < 6) {
       setPasswordErr('Password must be 6 characters long');
       isReq = false;
-    } else if (email.indexOf('@') == -1) {
+    } else if (email.indexOf('@') !== -1) {
       setEmailErr('Enter valid email');
       isReq = false;
     }
@@ -48,20 +50,26 @@ function RegistrationView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
+      const token = localStorage.getItem('token');
       axios
-        .post('https://my-flix-app-1910.herokuapp.com/users', {
-          Name: name,
-          Username: username,
-          Password: password,
-          Email: email,
-          Birthday: birthday,
-        })
+        .put(
+          `https://my-flix-app-1910.herokuapp.com/users/${Username}`,
+          {
+            Name: name,
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then((response) => {
           const data = response.data;
           console.log(data);
-          alert('Registration successful, please Log into account');
+          alert('Update successful, please Log again into account');
           window.open('/', '_self');
-          // props.onRegistration(data); //Check this
         })
         .catch((response) => {
           console.log(response);
@@ -134,9 +142,19 @@ function RegistrationView(props) {
                 variant="info"
                 className="m-2"
                 type="submit"
+                onClick={() => {
+                  onBackClick();
+                }}
+              >
+                Back
+              </Button>
+              <Button
+                variant="info"
+                className="m-2"
+                type="submit"
                 onClick={handleSubmit}
               >
-                Register
+                Update
               </Button>
             </Form>
           </Card.Body>
@@ -146,8 +164,8 @@ function RegistrationView(props) {
   );
 }
 
-RegistrationView.propTypes = {
-  register: PropTypes.shape({
+UpdateView.propTypes = {
+  update: PropTypes.shape({
     name: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
@@ -155,4 +173,4 @@ RegistrationView.propTypes = {
   }),
 };
 
-export default RegistrationView;
+export default UpdateView;

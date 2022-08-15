@@ -1,17 +1,52 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+
+  // validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 4) {
+      setUsernameErr('Username must be 4 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPassword('Password must be 6 characters long');
+      isReq = false;
+    }
+
+    return isReq;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    const isReq = validate();
+    if (isReq) {
+      axios
+        .post('https://my-flix-app-1910.herokuapp.com/login', {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          console.log('no such user');
+        });
+    }
   };
 
   return (
@@ -28,6 +63,7 @@ function LoginView(props) {
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Your username"
                 />
+                {usernameErr && <p>{usernameErr}</p>}
               </Form.Group>
 
               <Form.Group controlId="formPassword">
@@ -38,23 +74,16 @@ function LoginView(props) {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your password"
                 />
+                {passwordErr && <p>{passwordErr}</p>}
               </Form.Group>
 
               <Button
-                variant="outline-info"
-                className="m-2"
+                variant="info"
+                className="mt-2"
                 type="submit"
                 onClick={handleSubmit}
               >
                 Login
-              </Button>
-              <Button
-                variant="info"
-                className="m-2"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Register
               </Button>
             </Form>
           </Card.Body>
