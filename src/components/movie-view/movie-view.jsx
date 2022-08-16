@@ -1,18 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class MovieView extends React.Component {
+  addMovie(movie) {
+    let username = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
+
+    axios
+      .put(
+        `https://my-flix-app-1910.herokuapp.com/${username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        alert(`${movie.Title} has been added to your Favorite list.`);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
       <Row className="justify-content-md-center">
-        <Col style={{ maxWidth: '35rem', margin: '16px' }}>
-          <img src={movie.ImageURL} />
+        <Col className="mt-5">
+          <img style={{ maxWidth: '28rem' }} src={movie.ImageURL} />
         </Col>
-        <Col style={{ width: '35rem', margin: '16px' }}>
+        <Col className="mt-5">
           <Card>
             <Card.Header>Title: {movie.Title}</Card.Header>
             <ListGroup variant="flush">
@@ -35,11 +56,22 @@ class MovieView extends React.Component {
           <Button
             className="mt-2"
             variant="info"
+            size="sm"
             onClick={() => {
               onBackClick();
             }}
           >
             Back
+          </Button>
+          <Button
+            onClick={() => {
+              this.addMovie(movie);
+            }}
+            className="mt-2 ml-4"
+            variant="info"
+            size="sm"
+          >
+            Add to Favorite
           </Button>
         </Col>
       </Row>

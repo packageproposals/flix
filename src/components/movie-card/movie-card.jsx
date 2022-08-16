@@ -22,7 +22,9 @@ class MovieCard extends React.Component {
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Genre.Name}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="info">Open</Button>
+            <Button size="sm" variant="info">
+              Open
+            </Button>
           </Link>
         </Card.Body>
       </Card>
