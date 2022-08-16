@@ -74,8 +74,7 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, favoriteMovies } = this.state;
-
+    const { movies, user } = this.state;
     return (
       <Router>
         <NavBar user={user} />
@@ -149,10 +148,14 @@ class MainView extends React.Component {
               return (
                 <Col md={8}>
                   <DirectorView
+                    movies={movies}
                     director={
                       movies.find((m) => m.Director.Name === match.params.name)
                         .Director
                     }
+                    directorMovies={movies.filter(
+                      (m) => m.Director.Name === match.params.name
+                    )}
                     onBackClick={() => history.goBack()}
                   />
                 </Col>
@@ -171,12 +174,15 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8}>
+                <Col md={10}>
                   <GenreView
                     genre={
                       movies.find((m) => m.Genre.Name === match.params.name)
                         .Genre
                     }
+                    genreMovies={movies.filter(
+                      (m) => m.Genre.Name === match.params.name
+                    )}
                     onBackClick={() => history.goBack()}
                   />
                 </Col>
@@ -192,6 +198,7 @@ class MainView extends React.Component {
                 <Col>
                   <ProfileView
                     user={user}
+                    movies={movies}
                     onBackClick={() => history.goBack()}
                   />
                 </Col>

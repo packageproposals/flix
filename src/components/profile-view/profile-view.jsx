@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import FavoriteMoviesView from './favorite-movies-view';
+import { FavoriteMoviesView } from './favorite-movies-view';
 
 function ProfileView(props) {
-  const { onBackClick } = props;
+  const { onBackClick, movies } = props;
   const [user, setUser] = useState(props.user);
+  // const [movies, setMovies] = useState(props.movies);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
   const thisUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
@@ -17,6 +19,7 @@ function ProfileView(props) {
       })
       .then((response) => {
         setUser(response.data);
+
         setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch((error) => console.error(error));
@@ -35,21 +38,6 @@ function ProfileView(props) {
         alert(`The account ${user.Username} was successfully deleted.`);
         localStorage.clear();
         window.open('/register', '_self');
-      })
-      .catch((error) => console.error(error));
-  };
-
-  const handleMovieDelete = (movieId) => {
-    axios
-      .delete(
-        `https://movime-api.herokuapp.com/users/${thisUser}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then(() => {
-        alert(`The movie was successfully deleted.`);
-        window.open('/users/:username', '_self');
       })
       .catch((error) => console.error(error));
   };
@@ -92,6 +80,23 @@ function ProfileView(props) {
           >
             Delete Profile
           </Button>
+        </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col>
+          <Card>
+            <Card.Header>
+              <h5 className="text-info">Favorite Movies</h5>
+            </Card.Header>
+            <Card.Body>
+              <FavoriteMoviesView
+                movies={movies}
+                favoriteMovies={favoriteMovies}
+                thisUser={thisUser}
+                token={token}
+              />
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </React.Fragment>
