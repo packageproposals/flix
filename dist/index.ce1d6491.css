@@ -6,29 +6,6 @@ body {
   font-family: Monoton, cursive;
 }
 
-.movie-card {
-  border: none;
-  box-shadow: 0 3px 8px #2a284c;
-}
-
-.movie-card:hover {
-  transition: all .3s ease-in-out;
-  transform: scale(1.02);
-}
-
-.card-button {
-  width: 12rem;
-  background: linear-gradient(to left, #a395fa, #2a284c);
-  border: none;
-}
-
-.card-button:hover {
-  width: 12rem;
-  background: linear-gradient(to right, #a395fa, #2a284c);
-  border: none;
-  transition: all 1s ease-in-out;
-}
-
 h5 {
   color: #6059a6;
 }
@@ -155,6 +132,29 @@ h5 {
 .card-movies-body {
   flex-direction: row;
   display: flex;
+}
+
+.movie-card {
+  border: none;
+  box-shadow: 0 3px 8px #2a284c;
+}
+
+.movie-card:hover {
+  transition: all .3s ease-in-out;
+  transform: scale(1.02);
+}
+
+.card-button {
+  width: 12rem;
+  background: linear-gradient(to left, #a395fa, #2a284c);
+  border: none;
+}
+
+.card-button:hover {
+  width: 12rem;
+  background: linear-gradient(to right, #a395fa, #2a284c);
+  border: none;
+  transition: all 1s ease-in-out;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
