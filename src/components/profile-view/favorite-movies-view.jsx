@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, Card, Col } from 'react-bootstrap';
+import './profile-view.scss';
 
 export function FavoriteMoviesView(props) {
   const { movies, favoriteMovies, thisUser, token } = props;
+  console.log(token);
 
   const favoriteMoviesList = movies.filter((m) => {
     return favoriteMovies.includes(m._id);
@@ -21,7 +23,7 @@ export function FavoriteMoviesView(props) {
       )
       .then(() => {
         alert(`The movie was successfully deleted.`);
-        window.open('/users/:username', '_self');
+        window.open('/users/' + thisUser, '_self');
       })
       .catch((error) => console.error(error));
   };
@@ -33,8 +35,8 @@ export function FavoriteMoviesView(props) {
       ) : (
         favoriteMoviesList.map((movie) => {
           return (
-            <Col xs={10} sm={8} md={6} lg={4}>
-              <Card border="info" style={{ width: '15rem', margin: '10px' }}>
+            <Col xs={10} sm={8} md={2} lg={3}>
+              <Card className="fav-card">
                 <Link to={`/movies/${movie._id}`}>
                   <Card.Img
                     variant="top"
@@ -44,15 +46,16 @@ export function FavoriteMoviesView(props) {
                 </Link>
 
                 <Card.Body>
-                  <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text>{movie.Genre.Name}</Card.Text>
+                  <Card.Title>
+                    <h6>{movie.Title}</h6>
+                  </Card.Title>
                   <Link to={`/movies/${movie._id}`}>
-                    <Button size="sm" variant="info">
+                    <Button size="sm" className="button">
                       Open
                     </Button>
                   </Link>
                   <Button
-                    className="ml-2"
+                    className="ml-2 delete-button"
                     variant="info"
                     size="sm"
                     onClick={() => {

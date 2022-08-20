@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './movie-view.scss';
 
 class MovieView extends React.Component {
   addMovie(movie) {
     let username = localStorage.getItem('user');
     let token = localStorage.getItem('token');
+    console.log(username);
 
     axios
       .put(
-        `https://my-flix-app-1910.herokuapp.com/${username}/movies/${movie._id}`,
+        `https://my-flix-app-1910.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {},
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -35,7 +38,9 @@ class MovieView extends React.Component {
         </Col>
         <Col className="mt-5">
           <Card>
-            <Card.Header>Title: {movie.Title}</Card.Header>
+            <Card.Header>
+              <h5>{movie.Title}</h5>
+            </Card.Header>
             <ListGroup variant="flush">
               <ListGroup.Item>Description: {movie.Description}</ListGroup.Item>
               <ListGroup.Item>
@@ -54,7 +59,7 @@ class MovieView extends React.Component {
             </ListGroup>
           </Card>
           <Button
-            className="mt-2"
+            className="mt-2 button"
             variant="info"
             size="sm"
             onClick={() => {
@@ -67,7 +72,7 @@ class MovieView extends React.Component {
             onClick={() => {
               this.addMovie(movie);
             }}
-            className="mt-2 ml-4"
+            className="mt-2 ml-4 button"
             variant="info"
             size="sm"
           >

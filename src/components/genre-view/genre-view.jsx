@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import MovieCard from '../movie-card/movie-card';
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap';
 
 class GenreView extends React.Component {
   render() {
@@ -19,6 +24,19 @@ class GenreView extends React.Component {
               </ListGroup>
             </Card>
 
+            <Card className="mt-5">
+              <Card.Header>
+                <h6>More movies with {genre.Name} genre:</h6>
+              </Card.Header>
+              <ListGroup variant="flush">
+                {genreMovies.map((movie) => (
+                  <ListGroupItem key={movie._id} movie={movie}>
+                    {movie.Title}
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+            </Card>
+
             <Button
               className="mt-2"
               variant="info"
@@ -28,22 +46,6 @@ class GenreView extends React.Component {
             >
               Back
             </Button>
-          </Col>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Col>
-            <h5 className="text-info">More movies with {genre.Name} genre:</h5>
-            <Card>
-              <Card.Body>
-                <Col>
-                  {genreMovies.map((movie) => (
-                    <MovieCard key={movie._id} movie={movie}>
-                      {movie.Title}
-                    </MovieCard>
-                  ))}
-                </Col>
-              </Card.Body>
-            </Card>
           </Col>
         </Row>
       </React.Fragment>

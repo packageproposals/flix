@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import MovieCard from '../movie-card/movie-card';
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap';
 
 class DirectorView extends React.Component {
   render() {
@@ -13,9 +18,26 @@ class DirectorView extends React.Component {
         <Row className="justify-content-md-center">
           <Col style={{ width: '35rem', margin: '16px' }}>
             <Card>
-              <Card.Header>{director.Name}</Card.Header>
+              <Card.Header className="text-info">{director.Name}</Card.Header>
               <ListGroup variant="flush">
-                <ListGroup.Item>{director.Bio}</ListGroup.Item>
+                <ListGroup.Item>Bio: {director.Bio}</ListGroup.Item>
+                <ListGroup.Item>Born: {director.Born}</ListGroup.Item>
+                <ListGroup.Item>
+                  Birth name: {director.BirthName}
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+
+            <Card className="mt-5">
+              <Card.Header>
+                <h6>Directed Movies:</h6>
+              </Card.Header>
+              <ListGroup variant="flush">
+                {directorMovies.map((movie) => (
+                  <ListGroupItem key={movie._id} movie={movie}>
+                    {movie.Title}
+                  </ListGroupItem>
+                ))}
               </ListGroup>
             </Card>
 
@@ -32,9 +54,9 @@ class DirectorView extends React.Component {
           </Col>
         </Row>
 
-        <Row className="justify-content-md-center">
+        {/* <Row className="justify-content-md-center">
           <Col>
-            <h5 className="text-info">Directed Movies:</h5>
+            <p className="text-info">Directed Movies:</p>
             <Card>
               <Card.Body>
                 {directorMovies.map((movie) => (
@@ -45,7 +67,7 @@ class DirectorView extends React.Component {
               </Card.Body>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
       </React.Fragment>
     );
   }

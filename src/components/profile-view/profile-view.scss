@@ -1,0 +1,43 @@
+.card-movies {
+  margin-top: 2.5rem;
+}
+
+h5 {
+  color: #6059a6;
+}
+
+.button {
+  background: #6059a6;
+  border: none;
+}
+
+.button:hover {
+  border: none;
+  background: #2a284c;
+  transition: linear 0.33s;
+}
+
+.delete-button {
+  border: none;
+  background: #79334f;
+  color: whitesmoke;
+}
+
+.delete-button:hover {
+  color: whitesmoke;
+  border: none;
+  background: #6d0a02;
+  transition: linear 0.33s;
+}
+
+.fav-card {
+  padding: 0;
+  margin: 0;
+  width: 14rem;
+  transform: scale(0.85);
+}
+
+.card-movies-body {
+  display: flex;
+  flex-direction: row;
+}
