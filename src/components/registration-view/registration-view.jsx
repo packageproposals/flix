@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import './registration-view.scss';
 
 function RegistrationView(props) {
   const [name, setName] = useState('');
@@ -75,7 +76,7 @@ function RegistrationView(props) {
   return (
     <Row className="justify-content-md-center">
       <Col md="auto">
-        <Card border="info" style={{ width: '35rem', margin: '25vh' }}>
+        <Card className="register-card">
           <Card.Body>
             <Form>
               <Form.Group controlId="formName">
@@ -132,7 +133,7 @@ function RegistrationView(props) {
               </Form.Group>
               <Button
                 variant="info"
-                className="m-2"
+                className="m-2 register-button"
                 type="submit"
                 onClick={handleSubmit}
               >

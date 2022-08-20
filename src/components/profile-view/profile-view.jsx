@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FavoriteMoviesView } from './favorite-movies-view';
+import './profile-view.scss';
 
 function ProfileView(props) {
   const { onBackClick, movies } = props;
@@ -47,7 +48,7 @@ function ProfileView(props) {
       <Row className="justify-content-md-center">
         <Col style={{ width: '35rem', margin: '16px' }}>
           <Button
-            className="mb-2"
+            className="mb-2 button"
             variant="info"
             onClick={() => {
               onBackClick();
@@ -55,24 +56,14 @@ function ProfileView(props) {
           >
             Back
           </Button>
-          <Card>
-            <Card.Header>{user.Name}</Card.Header>
-            <ListGroup variant="flush">
-              <ListGroup.Item>Username: {user.Username}</ListGroup.Item>
-              <ListGroup.Item>Password: ****</ListGroup.Item>
-              <ListGroup.Item>Email: {user.Email}</ListGroup.Item>
-              <ListGroup.Item>Birthday: {user.Birthday}</ListGroup.Item>
-            </ListGroup>
-          </Card>
-
           <Link to={`/users-update/`}>
-            <Button className="mt-2" variant="info">
+            <Button className="mb-2 ml-2 button" variant="info">
               Update Profile
             </Button>
           </Link>
 
           <Button
-            className="mt-2 ml-2"
+            className="mb-2 ml-2 delete-button"
             variant="warning"
             onClick={() => {
               handleDelete();
@@ -80,15 +71,22 @@ function ProfileView(props) {
           >
             Delete Profile
           </Button>
-        </Col>
-      </Row>
-      <Row className="justify-content-md-center">
-        <Col>
-          <Card>
-            <Card.Header>
-              <h5 className="text-info">Favorite Movies</h5>
+          <Card className="card-info">
+            <Card.Header className="header">
+              <h5>{user.Name}</h5>
             </Card.Header>
-            <Card.Body>
+            <ListGroup variant="flush">
+              <ListGroup.Item>Username: {user.Username}</ListGroup.Item>
+              <ListGroup.Item>Password: ****</ListGroup.Item>
+              <ListGroup.Item>Email: {user.Email}</ListGroup.Item>
+              <ListGroup.Item>Birthday: {user.Birthday}</ListGroup.Item>
+            </ListGroup>
+          </Card>
+          <Card className="card-movies">
+            <Card.Header className="header">
+              <h5>Favorite Movies</h5>
+            </Card.Header>
+            <Card.Body className="card-movies-body">
               <FavoriteMoviesView
                 movies={movies}
                 favoriteMovies={favoriteMovies}

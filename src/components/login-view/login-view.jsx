@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import './login-view.scss';
 
 function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -46,50 +47,58 @@ function LoginView(props) {
         .catch((e) => {
           console.log('no such user');
         });
+      alert('Logging in ..');
     }
   };
 
   return (
-    <Row className="justify-content-md-center">
-      <Col md="auto">
-        <Card border="info" style={{ width: '35rem', margin: '25vh' }}>
-          <Card.Body>
-            <Form>
-              <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Your username"
-                />
-                {usernameErr && <p>{usernameErr}</p>}
-              </Form.Group>
+    <React.Fragment>
+      <Row className="justify-content-md-center">
+        <Col md="auto">
+          <h4>Please Log in</h4>
+        </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col md="auto">
+          <Card className="login-card">
+            <Card.Body>
+              <Form>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Your username"
+                  />
+                  {usernameErr && <p>{usernameErr}</p>}
+                </Form.Group>
 
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Your password"
-                />
-                {passwordErr && <p>{passwordErr}</p>}
-              </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Your password"
+                  />
+                  {passwordErr && <p>{passwordErr}</p>}
+                </Form.Group>
 
-              <Button
-                variant="info"
-                className="mt-2"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Login
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
+                <Button
+                  variant="info"
+                  className="mt-2 login-button"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Login
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </React.Fragment>
   );
 }
 

@@ -1,1 +1,25 @@
+$main: linear-gradient(to left, #a395fa, #2a284c);
+$secondary: linear-gradient(to right, #a395fa, #2a284c);
 
+.movie-card {
+  border: none;
+  box-shadow: #2a284c 0px 3px 8px;
+}
+
+.movie-card:hover {
+  transform: scale(1.02);
+  transition: ease-in-out 0.3s;
+}
+
+.card-button {
+  width: 12rem;
+  background: $main;
+  border: none;
+}
+
+.card-button:hover {
+  width: 12rem;
+  background: $secondary;
+  border: none;
+  transition: ease-in-out 1s;
+}

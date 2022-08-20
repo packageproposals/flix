@@ -12,6 +12,7 @@ import NavBar from '../nav-bar/nav-bar';
 import ProfileView from '../profile-view/profile-view';
 import UpdateView from '../profile-view/update-view';
 import RegistrationView from '../registration-view/registration-view';
+import { setMovies } from '../../actions/actions';
 
 class MainView extends React.Component {
   constructor() {

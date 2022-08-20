@@ -1,0 +1,22 @@
+$navColor: linear-gradient(35deg, #2a284c, #6059a6);
+
+.navbar {
+  background: $navColor;
+  border-radius: 1rem;
+}
+
+.nav-text:hover {
+  transform: scale(1.15);
+  transition: linear 0.2s;
+}
+
+.nav-logout {
+  transform: scale(1.7);
+  margin-right: 10px;
+}
+
+.nav-icon {
+  transform: scale(1.5);
+  margin: 10px;
+  padding-bottom: 3px;
+}
