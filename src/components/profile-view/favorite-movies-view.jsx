@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Button, Card, Col } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import './profile-view.scss';
 
 export function FavoriteMoviesView(props) {
@@ -33,38 +33,40 @@ export function FavoriteMoviesView(props) {
       ) : (
         favoriteMoviesList.map((movie) => {
           return (
-            <Col xs={10} sm={8} md={2} lg={3}>
-              <Card className="fav-card">
-                <Link to={`/movies/${movie._id}`}>
-                  <Card.Img
-                    variant="top"
-                    src={movie.ImageURL}
-                    style={{ height: '20rem' }}
-                  />
-                </Link>
-
-                <Card.Body>
-                  <Card.Title>
-                    <h6>{movie.Title}</h6>
-                  </Card.Title>
+            <Row lg={3} md={5} sm={12}>
+              <Col lg={3} md={5} sm={12}>
+                <Card className="fav-card">
                   <Link to={`/movies/${movie._id}`}>
-                    <Button size="sm" className="button">
-                      Open
-                    </Button>
+                    <Card.Img
+                      variant="top"
+                      src={movie.ImageURL}
+                      style={{ height: '20rem' }}
+                    />
                   </Link>
-                  <Button
-                    className="ml-2 delete-button"
-                    variant="info"
-                    size="sm"
-                    onClick={() => {
-                      handleMovieDelete(movie._id);
-                    }}
-                  >
-                    Remove
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
+
+                  <Card.Body>
+                    <Card.Title>
+                      <h6>{movie.Title}</h6>
+                    </Card.Title>
+                    <Link to={`/movies/${movie._id}`}>
+                      <Button size="sm" className="button">
+                        Open
+                      </Button>
+                    </Link>
+                    <Button
+                      className="ml-2 delete-button"
+                      variant="info"
+                      size="sm"
+                      onClick={() => {
+                        handleMovieDelete(movie._id);
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
           );
         })
       )}
