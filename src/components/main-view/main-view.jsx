@@ -27,7 +27,7 @@ class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
+      this.props.setUser({
         user: localStorage.getItem('user'),
       });
       this.getMovies(accessToken);
@@ -42,7 +42,7 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
+    this.props.setUser({
       user: authData.user.Username,
     });
 
@@ -54,7 +54,7 @@ class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({
+    this.setUser({
       user: null,
     });
   }
@@ -75,6 +75,7 @@ class MainView extends React.Component {
   render() {
     let { movies } = this.props;
     let { user } = this.props;
+    let localUser = localStorage.getItem('user');
 
     return (
       <Router>
@@ -113,6 +114,7 @@ class MainView extends React.Component {
           <Route
             path="/movies/:movieId"
             render={({ match, history }) => {
+              console.log(user);
               if (!user)
                 return (
                   <Col>
@@ -190,7 +192,7 @@ class MainView extends React.Component {
           <Route
             path={`/users/${user}`}
             render={({ history }) => {
-              if (!user) return <Redirect to="/" />;
+              if (!localUser) return <Redirect to="/" />;
               return (
                 <Col>
                   <ProfileView

@@ -6,12 +6,6 @@ import { setUser } from '../../actions/actions';
 import './login-view.scss';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
 function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -51,6 +45,7 @@ function LoginView(props) {
         .then((response) => {
           const data = response.data;
           props.onLoggedIn(data);
+          props.setUser(data);
         })
         .catch((e) => {
           console.log('no such user');
@@ -94,7 +89,6 @@ function LoginView(props) {
                 </Form.Group>
 
                 <Button
-                  variant="info"
                   className="mt-2 login-button"
                   type="submit"
                   onClick={handleSubmit}
@@ -109,6 +103,12 @@ function LoginView(props) {
     </React.Fragment>
   );
 }
+
+let mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
 LoginView.propTypes = {
   // user: PropTypes.shape({

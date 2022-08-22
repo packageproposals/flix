@@ -8,6 +8,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
+import './genre-view.scss';
 
 class GenreView extends React.Component {
   render() {
@@ -18,7 +19,9 @@ class GenreView extends React.Component {
         <Row className="justify-content-md-center">
           <Col style={{ width: '35rem', margin: '16px' }}>
             <Card>
-              <Card.Header>{genre.Name}</Card.Header>
+              <Card.Header>
+                <h5>{genre.Name}</h5>
+              </Card.Header>
               <ListGroup variant="flush">
                 <ListGroup.Item>{genre.Description}</ListGroup.Item>
               </ListGroup>
@@ -38,8 +41,7 @@ class GenreView extends React.Component {
             </Card>
 
             <Button
-              className="mt-2"
-              variant="info"
+              className="mt-2 button"
               onClick={() => {
                 onBackClick();
               }}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import './update-view.scss';
 
 function UpdateView(props) {
   const { onBackClick } = props;
@@ -81,86 +82,91 @@ function UpdateView(props) {
   };
 
   return (
-    <Row className="justify-content-md-center">
-      <Col md="auto">
-        <Card border="info" style={{ width: '35rem', margin: '25vh' }}>
-          <Card.Body>
-            <Form>
-              <Form.Group controlId="formName">
-                <Form.Label>Full Name:</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Full Name"
-                />
-                {nameErr && <p>{nameErr}</p>}
-              </Form.Group>
+    <React.Fragment>
+      <Row className="justify-content-md-center">
+        <Col md="auto">
+          <h4>Update form</h4>
+        </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col md="auto">
+          <Card className="login-card">
+            <Card.Body>
+              <Form>
+                <Form.Group controlId="formName">
+                  <Form.Label>Full Name:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your Full Name"
+                  />
+                  {nameErr && <p>{nameErr}</p>}
+                </Form.Group>
 
-              <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Your username"
-                />
-                {usernameErr && <p>{usernameErr}</p>}
-              </Form.Group>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Your username"
+                  />
+                  {usernameErr && <p>{usernameErr}</p>}
+                </Form.Group>
 
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Your password"
-                />
-                {passwordErr && <p>{passwordErr}</p>}
-              </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Your password"
+                  />
+                  {passwordErr && <p>{passwordErr}</p>}
+                </Form.Group>
 
-              <Form.Group controlId="formPassword">
-                <Form.Label>Email:</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                />
-                {emailErr && <p>{emailErr}</p>}
-              </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email"
+                  />
+                  {emailErr && <p>{emailErr}</p>}
+                </Form.Group>
 
-              <Form.Group controlId="formBirthday">
-                <Form.Label>Birthday:</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={birthday}
-                  onChange={(e) => setBirthday(e.target.value)}
-                />
-              </Form.Group>
-              <Button
-                variant="info"
-                className="m-2"
-                type="submit"
-                onClick={() => {
-                  onBackClick();
-                }}
-              >
-                Back
-              </Button>
-              <Button
-                variant="info"
-                className="m-2"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Update
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
+                <Form.Group controlId="formBirthday">
+                  <Form.Label>Birthday:</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={birthday}
+                    onChange={(e) => setBirthday(e.target.value)}
+                  />
+                </Form.Group>
+                <Button
+                  className="m-2 button"
+                  type="submit"
+                  onClick={() => {
+                    onBackClick();
+                  }}
+                >
+                  Back
+                </Button>
+                <Button
+                  className="m-2 button"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Update
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </React.Fragment>
   );
 }
 

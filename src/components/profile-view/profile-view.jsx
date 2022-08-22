@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FavoriteMoviesView } from './favorite-movies-view';
+
 import './profile-view.scss';
 
 function ProfileView(props) {
   const { onBackClick, movies } = props;
   const [user, setUser] = useState(props.user);
-  // const [movies, setMovies] = useState(props.movies);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const thisUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
