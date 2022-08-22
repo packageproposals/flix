@@ -1,0 +1,21 @@
+.login-card {
+  width: 30rem;
+  margin: 25vh;
+  margin-top: 10vh;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: #2a284c 0px 20px 30px -10px;
+}
+
+.button {
+  background: #6059a6;
+  border: none;
+}
+
+.button:hover {
+  border: none;
+  background: #524d90;
+  transition: linear 0.33s;
+}

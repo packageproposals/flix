@@ -8,6 +8,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
+import './director-view.scss';
 
 class DirectorView extends React.Component {
   render() {
@@ -18,7 +19,9 @@ class DirectorView extends React.Component {
         <Row className="justify-content-md-center">
           <Col style={{ width: '35rem', margin: '16px' }}>
             <Card>
-              <Card.Header className="text-info">{director.Name}</Card.Header>
+              <Card.Header className="text-info">
+                <h5>{director.Name}</h5>
+              </Card.Header>
               <ListGroup variant="flush">
                 <ListGroup.Item>Bio: {director.Bio}</ListGroup.Item>
                 <ListGroup.Item>Born: {director.Born}</ListGroup.Item>
@@ -42,9 +45,7 @@ class DirectorView extends React.Component {
             </Card>
 
             <Button
-              className="mt-2"
-              size="sm"
-              variant="info"
+              className="mt-2 button"
               onClick={() => {
                 onBackClick();
               }}
