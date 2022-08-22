@@ -6,7 +6,7 @@ import './update-view.scss';
 
 function UpdateView(props) {
   const { onBackClick } = props;
-  const Username = localStorage.getItem('user');
+  const thisUser = localStorage.getItem('user');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -54,7 +54,7 @@ function UpdateView(props) {
       const token = localStorage.getItem('token');
       axios
         .put(
-          `https://my-flix-app-1910.herokuapp.com/users/${Username}`,
+          `https://my-flix-app-1910.herokuapp.com/users/${thisUser}`,
           {
             Name: name,
             Username: username,
@@ -147,7 +147,6 @@ function UpdateView(props) {
                 </Form.Group>
                 <Button
                   className="m-2 button"
-                  type="submit"
                   onClick={() => {
                     onBackClick();
                   }}
