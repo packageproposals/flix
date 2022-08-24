@@ -8,6 +8,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 import './director-view.scss';
 
 class DirectorView extends React.Component {
@@ -16,6 +17,10 @@ class DirectorView extends React.Component {
 
     return (
       <React.Fragment>
+        <Helmet>
+          <title>{director.Name}</title>
+          <meta name="Director" content="Director view" />
+        </Helmet>
         <Row className="justify-content-md-center">
           <Col style={{ width: '35rem', margin: '16px' }}>
             <Card>

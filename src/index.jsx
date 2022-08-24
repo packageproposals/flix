@@ -5,6 +5,8 @@ import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import moviesApp from './reducers/reducers';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import MainView from './components/main-view/main-view';
 
@@ -19,6 +21,17 @@ class MyFlixApplication extends React.Component {
     return (
       <Provider store={store}>
         <Container>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <MainView />
         </Container>
       </Provider>

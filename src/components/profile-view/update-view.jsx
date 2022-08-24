@@ -49,7 +49,19 @@ function UpdateView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const isReq = validate();
+    const notify = () =>
+      toast.success('Update successful.Please Log in!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
     if (isReq) {
       const token = localStorage.getItem('token');
       axios
@@ -69,16 +81,15 @@ function UpdateView(props) {
         .then((response) => {
           const data = response.data;
           console.log(data);
-          alert('Update successful, please Log again into account');
           window.open('/', '_self');
         })
         .catch((response) => {
           console.log(response);
-          alert('unable to register');
         });
 
       console.log(name, username, password, email, birthday);
     }
+    return notify();
   };
 
   return (

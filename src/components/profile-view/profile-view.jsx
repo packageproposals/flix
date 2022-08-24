@@ -3,6 +3,11 @@ import axios from 'axios';
 import { Row, Col, Button, Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FavoriteMoviesView } from './favorite-movies-view';
+// import { setUser } from '../../actions/actions';
+// import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './profile-view.scss';
 
@@ -31,20 +36,35 @@ function ProfileView(props) {
   }, []);
 
   const handleDelete = () => {
+    const notify = () =>
+      toast.success('The account was successfully deleted!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     axios
       .delete(`https://my-flix-app-1910.herokuapp.com/users/${thisUser}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        alert(`The account ${user.Username} was successfully deleted.`);
         localStorage.clear();
         window.open('/register', '_self');
       })
       .catch((error) => console.error(error));
+
+    return notify();
   };
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>{user.Username + 's profile'}</title>
+        <meta name="Profile" content="Profile view" />
+      </Helmet>
       <Row className="justify-content-md-center">
         <Col style={{ width: '35rem', margin: '16px' }}>
           <Button
@@ -100,5 +120,11 @@ function ProfileView(props) {
     </React.Fragment>
   );
 }
+
+// let mapStateToProps = (state) => {
+//   return {
+//     user: state.user,
+//   };
+// };
 
 export default ProfileView;

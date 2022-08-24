@@ -5,6 +5,8 @@ import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { setUser } from '../../actions/actions';
 import './login-view.scss';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -36,6 +38,16 @@ function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
+    const notify = () =>
+      toast.info('Logging you in..', {
+        position: 'top-left',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     if (isReq) {
       axios
         .post('https://my-flix-app-1910.herokuapp.com/login', {
@@ -50,8 +62,8 @@ function LoginView(props) {
         .catch((e) => {
           console.log('no such user');
         });
-      alert('Logging in ..');
     }
+    return notify();
   };
 
   return (
