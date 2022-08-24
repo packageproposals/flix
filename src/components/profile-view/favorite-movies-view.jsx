@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import './profile-view.scss';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function FavoriteMoviesView(props) {
   const { movies, favoriteMovies, thisUser, token } = props;
@@ -12,6 +14,16 @@ export function FavoriteMoviesView(props) {
   });
 
   const handleMovieDelete = (movieId) => {
+    const notify = () =>
+      toast.success('Movie has been removed!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     axios
       .delete(
         `https://my-flix-app-1910.herokuapp.com/users/${thisUser}/movies/${movieId}`,
@@ -20,10 +32,11 @@ export function FavoriteMoviesView(props) {
         }
       )
       .then(() => {
-        alert(`The movie was successfully deleted.`);
         window.open('/users/' + thisUser, '_self');
       })
       .catch((error) => console.error(error));
+
+    return notify();
   };
 
   return (
@@ -33,8 +46,8 @@ export function FavoriteMoviesView(props) {
       ) : (
         favoriteMoviesList.map((movie) => {
           return (
-            <Row lg={3} md={5} sm={12}>
-              <Col lg={3} md={5} sm={12}>
+            <Row>
+              <Col>
                 <Card className="fav-card">
                   <Link to={`/movies/${movie._id}`}>
                     <Card.Img

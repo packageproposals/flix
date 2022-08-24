@@ -8,6 +8,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 import './genre-view.scss';
 
 class GenreView extends React.Component {
@@ -16,6 +17,10 @@ class GenreView extends React.Component {
 
     return (
       <React.Fragment>
+        <Helmet>
+          <title>{genre.Name}</title>
+          <meta name="Profile" content="Profile view" />
+        </Helmet>
         <Row className="justify-content-md-center">
           <Col style={{ width: '35rem', margin: '16px' }}>
             <Card>

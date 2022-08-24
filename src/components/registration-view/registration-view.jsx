@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import './registration-view.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 function RegistrationView(props) {
   const [name, setName] = useState('');
@@ -47,6 +49,16 @@ function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const notify = () =>
+      toast.success('Registration successful.Please Log in!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     const isReq = validate();
     if (isReq) {
       axios
@@ -60,17 +72,16 @@ function RegistrationView(props) {
         .then((response) => {
           const data = response.data;
           console.log(data);
-          alert('Registration successful, please Log into account');
           window.open('/', '_self');
           // props.onRegistration(data); //Check this
         })
         .catch((response) => {
           console.log(response);
-          alert('unable to register');
         });
 
       console.log(name, username, password, email, birthday);
     }
+    return notify();
   };
 
   return (
