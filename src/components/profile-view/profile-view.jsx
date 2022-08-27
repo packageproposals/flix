@@ -25,7 +25,6 @@ function ProfileView(props) {
       })
       .then((response) => {
         setUser(response.data);
-
         setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch((error) => console.error(error));
