@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, Card, Col, Row } from 'react-bootstrap';
@@ -32,7 +32,8 @@ export function FavoriteMoviesView(props) {
         }
       )
       .then(() => {
-        window.open('/users/' + thisUser, '_self');
+        window.location.reload();
+        // window.open('/users/' + thisUser, '_self');
       })
       .catch((error) => console.error(error));
 
