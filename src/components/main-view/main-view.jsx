@@ -75,7 +75,7 @@ class MainView extends React.Component {
   render() {
     let { movies } = this.props;
     let { user } = this.props;
-    let localUser = localStorage.getItem('user');
+    // let localUser = localStorage.getItem('user');
 
     return (
       <Router>
@@ -192,7 +192,7 @@ class MainView extends React.Component {
           <Route
             path={`/users/${user}`}
             render={({ history }) => {
-              if (!localUser) return <Redirect to="/" />;
+              // if (!localUser) return <Redirect to="/" />;
               return (
                 <Col>
                   <ProfileView
